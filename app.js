@@ -24,6 +24,10 @@ app.use(bodyParser.urlencoded({
     limit: '10000mb'
 }));
 
+app.get('/',(req,res,next)=>{
+    res.send('Ici la  terre');
+});
+
 
 
 db().then(_ => {
