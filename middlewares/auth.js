@@ -6,9 +6,9 @@ require('dotenv').config({
 });
 
 module.exports = async (req, res, next) => {
-  //get the token from the header if present
+
   let token = req.headers["x-access-token"] || req.headers["authorization"] || '';
-  //if no token found, return response (without going to the next middelware)
+  
   token = token.replace('Bearer ', '');
 
 

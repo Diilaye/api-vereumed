@@ -28,6 +28,9 @@ app.get('/',(req,res,next)=>{
     res.send('Ici la  terre');
 });
 
+const authRoute  = require('./routes/auth');
+
+app.use('/api/v1/users' , authRoute); 
 
 
 db().then(_ => {
