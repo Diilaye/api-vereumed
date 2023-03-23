@@ -63,45 +63,56 @@ exports.sendCode  = async (req,res) => {
     const max = 999999;
 
     const num = Math.floor(Math.random() * (max - min + 1)) + min;
-   
-    const newCode  = codeModel();
 
-    newCode.code = num;
+    const phoneV = await authModel.findOne({
+        phone :req.body.telSender
+    })
 
-    const codeSave = await newCode.save();
-    
+    if(phoneV =null) {
+        const newCode  = codeModel();
 
-    const updateCode = async () => {
+        newCode.code = num;
 
-        const i = await codePhoneModel.findById(codeSave._id);
+        newCode.phone =  req.query.phone;
 
-        i.is_treat = true;
+        const codeSave = await newCode.save();
+        
 
-        const j = await i.save();
+        const updateCode = async () => {
+
+            const i = await codePhoneModel.findById(codeSave._id);
+
+            i.is_treat = true;
+
+            const j = await i.save();
+        }
+
+        setTimeout(updateCode, 180000);
+
+        let data = JSON.stringify({
+            "from": "InfoSMS",
+            "to": req.query.phone,
+            "text": "Votre code de validation Verumed est le suivant: "+num 
+        });
+
+        let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://api.freebusiness.sn/sms/1/text/single',
+            headers: { 
+            'authorization': 'Basic '+process.env.KEY_FREE+'==', 
+            'Content-Type': 'application/json'
+            },
+            data : data
+        };
+        
+        axios.request(config)
+        .then((_) => message.reponse(res , message.createObject('Code') ,201 , num))
+        .catch((error) => message.reponse(res,message.error() ,400 , error));
+    } else {
+        return message.reponse(res , message.findObject('Telephone') ,200 , phoneV);
     }
-
-    setTimeout(updateCode, 180000);
-
-      let data = JSON.stringify({
-        "from": "InfoSMS",
-        "to": req.query.phone,
-        "text": "Votre code de validation Verumed est le suivant: "+num 
-      });
-
-      let config = {
-        method: 'post',
-        maxBodyLength: Infinity,
-        url: 'https://api.freebusiness.sn/sms/1/text/single',
-        headers: { 
-          'authorization': 'Basic '+process.env.KEY_FREE+'==', 
-          'Content-Type': 'application/json'
-        },
-        data : data
-      };
-      
-      axios.request(config)
-      .then((_) => message.reponse(res , message.createObject('Code') ,201 , num))
-      .catch((error) => message.reponse(res,message.error() ,400 , error));
+   
 
    } catch (error) {
     message.reponse(res,message.error() ,400 , error);
