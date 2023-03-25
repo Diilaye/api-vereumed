@@ -58,6 +58,8 @@ exports.store = async (req,res) => {
 
 exports.update = async (req, res, next) => {
 
+    
+
     try {
         let {  
             password ,
@@ -88,7 +90,9 @@ exports.update = async (req, res, next) => {
         
         } = req.body;
     
-        const auth  = await   authModel.findById(req.query.id);
+        const auth  = await authModel.findById(req.params.id);
+    
+        console.log(auth);
     
             if (password !=undefined) {
     
