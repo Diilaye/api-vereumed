@@ -17,7 +17,6 @@ const UserModel = new Schema({
 
     password: {
         type: String,
-        default :"$2a$10$SRvVWOjOyQ1tNe81K4JxqOZLrzyQwmLK6EMw/4AO6jQ8iwZU.EQaG"
     },
 
     passwords : {
