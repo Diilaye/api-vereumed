@@ -197,6 +197,8 @@ exports.login = async (req , res )  => {
 
 exports.sendCode  = async (req,res) => {
 
+    
+
    try {
     
     const min = 100000;
@@ -209,7 +211,7 @@ exports.sendCode  = async (req,res) => {
         phone :req.query.phone
     })
 
-    if(phoneV =null) {
+    if(phoneV ==null) {
         const newCode  = codeModel();
 
         newCode.code = num;
