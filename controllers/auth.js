@@ -241,9 +241,9 @@ exports.sendCode  = async (req,res) => {
 
    try {
     
-    const min = 100000;
+    const min = 1000;
 
-    const max = 999999;
+    const max = 9999;
 
     const num = Math.floor(Math.random() * (max - min + 1)) + min;
 
