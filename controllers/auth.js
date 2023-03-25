@@ -305,6 +305,8 @@ exports.sendCode  = async (req,res) => {
 
 exports.verifCode = async (req,res) =>  {
 
+   
+
     try {
 
         const codes = await codeModel.findOne({
@@ -312,23 +314,23 @@ exports.verifCode = async (req,res) =>  {
             phone : req.body.phone,
             is_treat : false
         }) ;
-
+    
         if(codes){
-
+    
             codes.is_treat = true ;
-
+    
             const auth = authModel();
-
+    
             auth.phone = req.body.phone;
-
+    
            const authSave =  await auth.save();
-
+    
             await codes.save();
             
             return message.reponse(res , message.findObject('Code') ,200 , authSave);
             
         }
-
+    
         return message.reponse(res , message.notFindObject('Code') ,400 , {});
 
 
