@@ -8,6 +8,7 @@ const routes = express.Router();
 
 // Add routes
 routes.post('/', authCtrl.store);
+routes.post('/auth', authCtrl.login);
 routes.put('/:id', authCtrl.update);
 routes.get('/code', authCtrl.sendCode);
 routes.post('/code', authCtrl.verifCode);
