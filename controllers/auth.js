@@ -204,33 +204,35 @@ exports.update = async (req, res, next) => {
 
 exports.login = async (req , res )  => {
 
+    
+
     try {
         
         const  {phone , password } = req.body;
-
+    
         if(phone !=undefined) {
-
+    
             const auth = await authModel.findOne({
                 phone : phone
             }).exec();
-
+    
             if(bcrytjs.compareSync(password, auth.password)) {
                 const token = jwt.sign({
                     id_user: auth.id,
                     role_user : auth.role , 
                     phone_user : auth.phone
                 }, process.env.JWT_SECRET, { expiresIn: '8784h' });
-
+    
                 return message.reponse(res,message.findObject('User'),200,{
                     user : auth ,
                     token : token
                 });
-
-
+    
+    
             }else {
                 return message.reponse(res,message.login('2'),400,{});
             }
-
+    
         }
 
     } catch (error) {
