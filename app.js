@@ -6,8 +6,6 @@ const cors = require('cors');
 
 const db = require('./config/db');
 
-const request = require('request');
-
 
 const app = express();
 
@@ -40,12 +38,6 @@ const fileRoutes  = require('./routes/file');
 
 app.use('/api/v1/users' , authRoute); 
 
-
-request('https://base-donnees-publique.medicaments.gouv.fr/index.php', { json: true }, (err, res, body) => {
-  if (err) { return console.log(err); }
-  console.log(body.url);
-  console.log(body.explanation);
-});
 
 db().then(_ => {
     const port = process.env.PORT
