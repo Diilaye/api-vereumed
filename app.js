@@ -6,6 +6,9 @@ const cors = require('cors');
 
 const db = require('./config/db');
 
+const request = require('request');
+
+
 const app = express();
 
 
@@ -28,10 +31,21 @@ app.get('/',(req,res,next)=>{
     res.send('Ici la  terre');
 });
 
+app.use('/verumed-file', express.static('uploads'));
+
+
 const authRoute  = require('./routes/auth');
+
+const fileRoutes  = require('./routes/file');
 
 app.use('/api/v1/users' , authRoute); 
 
+
+request('https://base-donnees-publique.medicaments.gouv.fr/index.php', { json: true }, (err, res, body) => {
+  if (err) { return console.log(err); }
+  console.log(body.url);
+  console.log(body.explanation);
+});
 
 db().then(_ => {
     const port = process.env.PORT

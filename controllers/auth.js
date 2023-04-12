@@ -19,7 +19,7 @@ require('dotenv').config({
     path: './.env'
 });
 
-const message  =  require('../uitls/message');
+const message  =  require('../utils/message');
 
 exports.store = async (req,res) => {
     

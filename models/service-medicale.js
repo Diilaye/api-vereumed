@@ -13,10 +13,6 @@ const serviceMedicale = new Schema({
         type: String,
     },
 
-    avatar  : {
-        type: String,
-    },
-
     user : {
         type: Schema.Types.ObjectId,
         ref: "users"
