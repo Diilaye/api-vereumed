@@ -38,6 +38,8 @@ const fileRoutes  = require('./routes/file');
 
 app.use('/api/v1/users' , authRoute); 
 
+app.use('/api/v1/files' , fileRoutes); 
+
 
 db().then(_ => {
     const port = process.env.PORT
