@@ -63,6 +63,20 @@ exports.store = async (req,res) => {
 
 }
 
+exports.all = async (req,res,next) =>  {
+
+    
+
+    try {
+    const user  = await authModel.find(req.query).populate({}).exec();
+
+        return  message.reponse(res,message.findObject('User'),200,user);
+    } catch (error) {
+       return message.reponse(res,message.error() ,400 , error);
+    }
+
+}
+
 exports.update = async (req, res, next) => {
 
     
