@@ -17,6 +17,12 @@ require('dotenv').config({
 
 const message  =  require('../utils/message');
 
+const  populateObject = [
+    {
+        path :"avatar"
+    }
+];
+
 exports.store = async (req,res) => {
     
     try {
@@ -68,7 +74,7 @@ exports.all = async (req,res,next) =>  {
     
 
     try {
-    const user  = await authModel.find(req.query).populate({}).exec();
+        const user  = await authModel.find(req.query).populate(populateObject).exec();
 
         return  message.reponse(res,message.findObject('User'),200,user);
     } catch (error) {
