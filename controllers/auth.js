@@ -11,10 +11,6 @@ const jwt = require('jsonwebtoken');
 
 const axios = require('axios').default;
 
-const axiosOrange = require('axios');
-
-
-
 require('dotenv').config({
     path: './.env'
 });
@@ -25,11 +21,20 @@ exports.store = async (req,res) => {
     
     try {
 
-        let { phone , firstName , lastName , avatar} = req.body;
+        let { phone , firstName , lastName , avatar ,role,password } = req.body;
 
         const auth  =  authModel();
 
         auth.phone  =  phone  ;
+
+        auth.role  =  role  ;
+
+        if(password != undefined) {
+
+            const passwordCrypt = bcrytjs.hashSync(password, salt);
+    
+            auth.password = passwordCrypt;
+        }
 
         if(firstName != undefined) {
             auth.firstName = firstName;
