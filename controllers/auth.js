@@ -21,9 +21,11 @@ exports.store = async (req,res) => {
     
     try {
 
-        let { phone , firstName , lastName , avatar ,role,password } = req.body;
+        let { phone , firstName , lastName , avatar ,role,password , name } = req.body;
 
         const auth  =  authModel();
+
+        auth.name  =  name  ;
 
         auth.phone  =  phone  ;
 

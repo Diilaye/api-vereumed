@@ -15,6 +15,12 @@ const UserModel = new Schema({
     },
 
 
+    name: {
+        type: String,
+        default :""
+    },
+
+
     password: {
         type: String,
     },
