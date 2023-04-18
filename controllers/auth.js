@@ -27,13 +27,15 @@ exports.store = async (req,res) => {
     
     try {
 
-        let { phone , firstName , lastName , avatar ,role,password , name } = req.body;
+        let { phone , firstName , lastName , avatar ,role,password , name ,crenaux, jours,prixAdulte, prixEnfant } = req.body;
 
         const auth  =  authModel();
 
         auth.name  =  name  ;
 
         auth.phone  =  phone  ;
+
+        auth.father  =  req.user.id_user  ;
 
         auth.role  =  role  ;
 
@@ -47,6 +49,24 @@ exports.store = async (req,res) => {
         if(firstName != undefined) {
             auth.firstName = firstName;
         }
+
+        if(crenaux != undefined) {
+            auth.crenaux = crenaux;
+        }
+
+        if(jours != undefined) {
+            auth.jours = jours;
+        }
+
+        if(prixAdulte != undefined) {
+            auth.prixAdulte = prixAdulte;
+        }
+
+        if(prixEnfant != undefined) {
+            auth.prixEnfant = prixEnfant;
+        }
+
+        
 
        if(lastName !=undefined){
             auth.lastName = lastName;
@@ -68,6 +88,8 @@ exports.store = async (req,res) => {
 
 
 }
+
+
 
 exports.all = async (req,res,next) =>  {
 

@@ -111,6 +111,26 @@ const UserModel = new Schema({
         default :""
     },
 
+    crenaux : {
+        type : Array,
+        default :[]
+    },
+
+    jours : {
+        type : Array,
+        default :[]
+    },
+
+    prixAdulte : {
+        type : String,
+        default :""
+    },
+
+    prixEnfant : {
+        type : String,
+        default :""
+    },
+
     address : {
         type: Schema.Types.ObjectId,
         ref: "addresse"
@@ -130,6 +150,11 @@ const UserModel = new Schema({
         ref: "prescription_service",
         default :[]
     }],
+
+    creanauxAfctif : {
+        type : Array,
+    
+    },
 
     
     prescription_medicale  :  [{
