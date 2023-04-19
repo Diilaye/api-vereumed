@@ -14,6 +14,7 @@ routes.post('/auth', authCtrl.login);
 routes.put('/:id', auth,authCtrl.update);
 routes.get('/code', authCtrl.sendCode);
 routes.get('/all', auth,authCtrl.all);
+routes.get('/allByFather', auth,authCtrl.allServiceByFather);
 routes.post('/code', authCtrl.verifCode);
 
 
