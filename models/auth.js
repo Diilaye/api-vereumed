@@ -43,7 +43,7 @@ const UserModel = new Schema({
    
     role: {
         type : String,
-        enum: ['patient', 'super', 'pharmacie', 'doctor', 'hopital','service', 'ambulance','clinique','laboratoire','spa','entreprise','ipm','regroupement-ipm'],
+        enum: ['patient', 'super', 'pharmacie', 'doctor', 'infirmier','hopital','service', 'ambulance','clinique','laboratoire','spa','entreprise','ipm','regroupement-ipm'],
         default: 'patient'
     },
 

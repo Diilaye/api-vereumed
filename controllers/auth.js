@@ -126,6 +126,23 @@ exports.allServiceByFather = async (req,res,next) =>  {
 
 }
 
+exports.allServiceByFather = async (req,res,next) =>  {
+
+    
+
+    try {
+
+        const user  = await authModel.find(
+            { $or: [ { role: "doctor" }, { role: "infirmier" } ] , father : req.user.id_user }
+        ).populate(populateObject).exec();
+
+        return  message.reponse(res,message.findObject('User'),200,user);
+    } catch (error) {
+       return message.reponse(res,message.error() ,400 , error);
+    }
+
+}
+
 
 exports.update = async (req, res, next) => {
 
