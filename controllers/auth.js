@@ -126,7 +126,7 @@ exports.allServiceByFather = async (req,res,next) =>  {
 
 }
 
-exports.allServiceByFather = async (req,res,next) =>  {
+exports.allMedecinByFather = async (req,res,next) =>  {
 
     
 
