@@ -10,6 +10,7 @@ const routes = express.Router();
 
 // Add routes
 routes.post('/',auth, authCtrl.store);
+routes.post('/mobile', authCtrl.mobileStore);
 routes.post('/auth', authCtrl.login);
 routes.put('/:id', auth,authCtrl.update);
 routes.get('/code', authCtrl.sendCode);

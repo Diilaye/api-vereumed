@@ -89,6 +89,70 @@ exports.store = async (req,res) => {
 
 }
 
+exports.mobileStore = async (req,res) => {
+    
+    try {
+
+        let { phone , firstName , lastName , avatar ,role,password , name ,crenaux, jours,prixAdulte, prixEnfant } = req.body;
+
+        const auth  =  authModel();
+
+        auth.name  =  name  ;
+
+        auth.phone  =  phone  ;
+
+        auth.role  =  role  ;
+
+        if(password != undefined) {
+
+            const passwordCrypt = bcrytjs.hashSync(password, salt);
+    
+            auth.password = passwordCrypt;
+        }
+
+        if(firstName != undefined) {
+            auth.firstName = firstName;
+        }
+
+        if(crenaux != undefined) {
+            auth.crenaux = crenaux;
+        }
+
+        if(jours != undefined) {
+            auth.jours = jours;
+        }
+
+        if(prixAdulte != undefined) {
+            auth.prixAdulte = prixAdulte;
+        }
+
+        if(prixEnfant != undefined) {
+            auth.prixEnfant = prixEnfant;
+        }
+
+        
+
+       if(lastName !=undefined){
+            auth.lastName = lastName;
+       }
+
+        if(avatar !=undefined){
+            auth.avatar = avatar;
+        }
+
+        const authSave = await auth.save();
+
+       return message.reponse(res,message.createObject('users') ,201,authSave);
+        
+    } catch (error) {
+
+        return message.reponse(res,message.error  ,400,error);
+        
+    }
+
+
+}
+
 
 
 exports.all = async (req,res,next) =>  {
