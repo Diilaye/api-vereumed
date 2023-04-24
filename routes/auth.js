@@ -12,7 +12,7 @@ const routes = express.Router();
 routes.post('/',auth, authCtrl.store);
 routes.post('/mobile', authCtrl.mobileStore);
 routes.post('/auth', authCtrl.login);
-routes.put('/:id', auth,authCtrl.update);
+routes.put('/', auth,authCtrl.update);
 routes.put('/mobile/:id',authCtrl.update);
 routes.get('/code', authCtrl.sendCode);
 routes.get('/all', auth,authCtrl.all);

@@ -242,7 +242,7 @@ exports.update = async (req, res, next) => {
         
         } = req.body;
     
-        const auth  = await authModel.findById(req.params.id);
+        const auth  = await authModel.findById(req.user.id_user);
     
         console.log(auth);
     
