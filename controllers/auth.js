@@ -221,6 +221,7 @@ exports.update = async (req, res, next) => {
             role,
             NameofIDCard,
             NumberfIDCard,
+            FileofIDCard,
             MaritalStatut,
             sexe,
             description,
@@ -273,6 +274,9 @@ exports.update = async (req, res, next) => {
             }
             if(NameofIDCard != undefined) {
                 auth.NameofIDCard = NameofIDCard;
+            }
+            if(FileofIDCard != undefined) {
+                auth.FileofIDCard = FileofIDCard;
             }
             if(NumberfIDCard != undefined) {
                 auth.NumberfIDCard = NumberfIDCard;
