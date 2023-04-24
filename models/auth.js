@@ -58,6 +58,11 @@ const UserModel = new Schema({
         default :""
     },
 
+    FileofIDCard : {
+        type: Schema.Types.ObjectId,
+        ref: "file"
+    },
+
     MaritalStatut  : {
         type : String,
         enum: ['marrie', 'celibataire' ],
