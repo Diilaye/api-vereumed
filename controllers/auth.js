@@ -20,6 +20,12 @@ const message  =  require('../utils/message');
 const  populateObject = [
     {
         path :"avatar"
+    },
+    {
+        path :"FileofIDCard"
+    },
+    {
+        path :'address'
     }
 ];
 
@@ -356,6 +362,193 @@ exports.update = async (req, res, next) => {
     }
 
 
+}
+
+exports.updateMobile = async (req, res, next) => {
+
+    
+
+    try {
+        let {  
+            password ,
+            email,
+            active,
+            father,
+            role,
+            NameofIDCard,
+            NumberfIDCard,
+            FileofIDCard,
+            MaritalStatut,
+            sexe,
+            description,
+            avatar,
+            cover,
+            firstName,
+            lastName,
+            matricule,
+            contry,
+            city,
+            address,
+            rv,
+            prescription_service,
+            prescription_medicale,
+            services,
+            factures,
+            transactions,
+            callFund
+        
+        } = req.body;
+    
+        const auth  = await authModel.findById(req.params.id);
+    
+        console.log(auth);
+    
+            if (password !=undefined) {
+    
+                const passwordCrypt = bcrytjs.hashSync(password, salt);
+    
+                auth.password = passwordCrypt;
+                
+            }
+    
+            if(firstName != undefined) {
+                auth.firstName = firstName;
+            }
+    
+            if(email != undefined) {
+                auth.email = email;
+            }
+    
+            if(active != undefined) {
+                auth.active = active;
+            }
+            if(father != undefined) {
+                auth.father = father;
+            }
+            if(role != undefined) {
+                auth.role = role;
+            }
+            if(NameofIDCard != undefined) {
+                auth.NameofIDCard = NameofIDCard;
+            }
+            if(FileofIDCard != undefined) {
+                auth.FileofIDCard = FileofIDCard;
+            }
+            if(NumberfIDCard != undefined) {
+                auth.NumberfIDCard = NumberfIDCard;
+            }
+            if(MaritalStatut != undefined) {
+                auth.MaritalStatut = MaritalStatut;
+            }
+            if(sexe != undefined) {
+                auth.sexe = sexe;
+            }
+            if(description != undefined) {
+                auth.description = description;
+            }
+            if(cover != undefined) {
+                auth.cover = cover;
+            }
+    
+            if(matricule != undefined) {
+                auth.matricule = matricule;
+            }
+    
+    
+            if(contry != undefined) {
+                auth.contry = contry;
+            }
+    
+            if(city != undefined) {
+                auth.city = city;
+            }
+    
+            if(address != undefined) {
+                auth.address = address;
+            }
+    
+            if(rv != undefined) {
+                auth.rv.push(rv) ;
+            }
+    
+            if(prescription_service != undefined) {
+                auth.prescription_service.push(prescription_service) ;
+            }
+    
+            if(prescription_medicale != undefined) {
+                auth.prescription_medicale.push(prescription_medicale) ;
+            }
+    
+            if(services != undefined) {
+                auth.services.push(services) ;
+            }
+    
+            if(factures != undefined) {
+                auth.factures.push(factures) ;
+            }
+    
+            if(transactions != undefined) {
+                auth.transactions.push(transactions) ;
+            }
+    
+            if(callFund != undefined) {
+                auth.callFund.push(callFund) ;
+            }
+    
+    
+            if(lastName !=undefined){
+                    auth.lastName = lastName;
+            }
+    
+            if(avatar !=undefined){
+                auth.avatar = avatar;
+            }
+    
+            const authSave = await auth.save();
+            
+            return  message.reponse(res,message.updateObject('User'),200,authSave);
+    } catch (error) {
+       return message.reponse(res,message.error() ,400 , error);
+    }
+
+
+}
+
+exports.auth = async( req, res)=> {
+
+    const auth = await authModel.findById(req.user.id_user).populate(populateObject).exec();
+
+        const token = jwt.sign({
+            id_user: auth.id,
+            role_user : auth.role , 
+            phone_user : auth.phone
+        }, process.env.JWT_SECRET, { expiresIn: '8784h' });
+
+        return message.reponse(res,message.findObject('User'),200,{
+            user : auth ,
+            token : token
+        });
+
+
+    try {
+        
+    
+        const auth = await authModel.findById(req.user.id_user).populate(populateObject).exec();
+
+        const token = jwt.sign({
+            id_user: auth.id,
+            role_user : auth.role , 
+            phone_user : auth.phone
+        }, process.env.JWT_SECRET, { expiresIn: '8784h' });
+
+        return message.reponse(res,message.findObject('User'),200,{
+            user : auth ,
+            token : token
+        });
+
+    } catch (error) {
+        return message.reponse(res,message.error(),400,error);
+    }
 }
 
 exports.login = async (req , res )  => {

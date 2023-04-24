@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const serviceMedicale = new Schema({
+const serviceMedicaleModel = new Schema({
 
 
     name : {
@@ -30,4 +30,4 @@ const serviceMedicale = new Schema({
     timestamps: true
   });
 
-module.exports = mongoose.model('service_medicale', serviceMedicale);
+module.exports = mongoose.model('service_medicale', serviceMedicaleModel);

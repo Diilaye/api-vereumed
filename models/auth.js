@@ -142,7 +142,7 @@ const UserModel = new Schema({
     },
 
     
-    rv : [{
+    rendez_vous : [{
         type: Schema.Types.ObjectId,
         ref: "rv",
         default :[]
@@ -150,7 +150,7 @@ const UserModel = new Schema({
 
 
 
-    prescription_service  :  [{
+    prescription_services  :  [{
         type: Schema.Types.ObjectId,
         ref: "prescription_service",
         default :[]
@@ -162,7 +162,7 @@ const UserModel = new Schema({
     },
 
     
-    prescription_medicale  :  [{
+    prescription_medicales  :  [{
         type: Schema.Types.ObjectId,
         ref: "prescription_medicale",
         default :[]

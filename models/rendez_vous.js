@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const rv = new Schema({
+const RendezVous = new Schema({
 
     patient : {
         type: Schema.Types.ObjectId,
@@ -66,4 +66,4 @@ const rv = new Schema({
     timestamps: true
   });
 
-module.exports = mongoose.model('rv', rv);
+module.exports = mongoose.model('rv', RendezVous);
