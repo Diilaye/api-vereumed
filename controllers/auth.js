@@ -33,36 +33,29 @@ const  populateObject = [
         path : 'services',
         populate : [
             {
-            
                 path :"avatar"
             },
 
-            {
-                path :"FileofIDCard"
-            },
-
-            {
-                path :'address'
-            },
-            {
-                path :'rendez_vous'
-            
-            }
+           
         ]
     }
 ];
 
 exports.store = async (req,res) => {
+
+    let { phone , firstName , lastName , avatar ,role,password , name ,crenaux, jours,prixAdulte, prixEnfant } = req.body;
+
+    const user = await authModel.findById(req.user.id_user).exec();
+    console.log('user' ,user);
+    
+
+    
     
     try {
 
-        let { phone , firstName , lastName , avatar ,role,password , name ,crenaux, jours,prixAdulte, prixEnfant } = req.body;
-
-        const user = await authModel.findById(req.user.id_user).exec();
-
-        if(!user) {
+        if(user) {
             const auth  =  authModel();
-
+    
             auth.name  =  name  ;
     
             auth.phone  =  phone  ;
@@ -114,11 +107,12 @@ exports.store = async (req,res) => {
                 user.services.push(authSave.id);
                 await user.save();
             }
-
+    
     
            return message.reponse(res,message.createObject('users') ,201,authSave);
+        }else {
+            return message.reponse(res,message.error  ,400,"error"); 
         }
-
        
         
     } catch (error) {
