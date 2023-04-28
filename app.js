@@ -36,9 +36,13 @@ const authRoute  = require('./routes/auth');
 
 const fileRoutes  = require('./routes/file');
 
+const rvRoutes  = require('./routes/rv');
+
 app.use('/api/v1/users' , authRoute); 
 
 app.use('/api/v1/files' , fileRoutes); 
+
+app.use('/api/v1/rv' , rvRoutes); 
 
 
 db().then(_ => {

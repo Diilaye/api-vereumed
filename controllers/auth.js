@@ -26,6 +26,29 @@ const  populateObject = [
     },
     {
         path :'address'
+    },{
+        path :'rendez_vous'
+    },
+    {
+        path : 'services',
+        populate : [
+            {
+            
+                path :"avatar"
+            },
+
+            {
+                path :"FileofIDCard"
+            },
+
+            {
+                path :'address'
+            },
+            {
+                path :'rendez_vous'
+            
+            }
+        ]
     }
 ];
 
@@ -35,56 +58,68 @@ exports.store = async (req,res) => {
 
         let { phone , firstName , lastName , avatar ,role,password , name ,crenaux, jours,prixAdulte, prixEnfant } = req.body;
 
-        const auth  =  authModel();
+        const user = await authModel.findById(req.user.id_user).exec();
 
-        auth.name  =  name  ;
+        if(!user) {
+            const auth  =  authModel();
 
-        auth.phone  =  phone  ;
-
-        auth.father  =  req.user.id_user  ;
-
-        auth.role  =  role  ;
-
-        if(password != undefined) {
-
-            const passwordCrypt = bcrytjs.hashSync(password, salt);
+            auth.name  =  name  ;
     
-            auth.password = passwordCrypt;
-        }
-
-        if(firstName != undefined) {
-            auth.firstName = firstName;
-        }
-
-        if(crenaux != undefined) {
-            auth.crenaux = crenaux;
-        }
-
-        if(jours != undefined) {
-            auth.jours = jours;
-        }
-
-        if(prixAdulte != undefined) {
-            auth.prixAdulte = prixAdulte;
-        }
-
-        if(prixEnfant != undefined) {
-            auth.prixEnfant = prixEnfant;
-        }
-
+            auth.phone  =  phone  ;
+    
+            auth.father  =  req.user.id_user  ;
+    
+            auth.role  =  role  ;
+    
+            if(password != undefined) {
+    
+                const passwordCrypt = bcrytjs.hashSync(password, salt);
         
+                auth.password = passwordCrypt;
+            }
+    
+            if(firstName != undefined) {
+                auth.firstName = firstName;
+            }
+    
+            if(crenaux != undefined) {
+                auth.crenaux = crenaux;
+            }
+    
+            if(jours != undefined) {
+                auth.jours = jours;
+            }
+    
+            if(prixAdulte != undefined) {
+                auth.prixAdulte = prixAdulte;
+            }
+    
+            if(prixEnfant != undefined) {
+                auth.prixEnfant = prixEnfant;
+            }
+    
+            
+    
+           if(lastName !=undefined){
+                auth.lastName = lastName;
+           }
+    
+            if(avatar !=undefined){
+                auth.avatar = avatar;
+            }
+    
+            const authSave = await auth.save();
+    
+            if(role =="service") {
+                user.services.push(authSave.id);
+                await user.save();
+            }
 
-       if(lastName !=undefined){
-            auth.lastName = lastName;
-       }
-
-        if(avatar !=undefined){
-            auth.avatar = avatar;
+    
+           return message.reponse(res,message.createObject('users') ,201,authSave);
         }
 
-        const authSave = await auth.save();
-
-       return message.reponse(res,message.createObject('users') ,201,authSave);
+       
         
     } catch (error) {
 
@@ -184,6 +219,26 @@ exports.allServiceByFather = async (req,res,next) =>  {
         const user  = await authModel.find(
             {
                 father : req.user.id_user,
+                role :"service"
+
+            }
+        ).populate(populateObject).exec();
+
+        return  message.reponse(res,message.findObject('User'),200,user);
+    } catch (error) {
+       return message.reponse(res,message.error() ,400 , error);
+    }
+
+}
+
+exports.allServiceByFatherMobile = async (req,res,next) =>  {
+
+    
+
+    try {
+        const user  = await authModel.find(
+            {
+                father : req.params.id,
                 role :"service"
 
             }

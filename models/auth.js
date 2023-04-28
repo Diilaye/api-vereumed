@@ -171,7 +171,7 @@ const UserModel = new Schema({
 
     services : [{
         type: Schema.Types.ObjectId,
-        ref: "service",
+        ref: "users",
         default :[]
     }],
 
@@ -183,7 +183,8 @@ const UserModel = new Schema({
 
     transactions : [{
         type: Schema.Types.ObjectId,
-        ref: "transaction"
+        ref: "transaction",
+        default : []
     }],
 
 

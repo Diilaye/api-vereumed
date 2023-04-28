@@ -16,4 +16,3 @@ routes.post('/',auth,fileCtrl.store);
 routes.delete('/:id', fileCtrl.delete);
 
 module.exports = routes;
-    
