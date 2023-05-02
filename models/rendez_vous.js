@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { defaults } = require('request');
 
 const Schema = mongoose.Schema;
 
@@ -27,6 +28,12 @@ const RendezVous = new Schema({
 
     symptome  :{
         type:String
+    },
+
+    type : {
+        type : String,
+        enum :['maison','hopital','call'],
+        default: 'hopital'
     },
 
     notes  :{

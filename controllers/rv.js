@@ -4,7 +4,7 @@ const rvModel = require('../models/rendez_vous');
 exports.store = async (req, res ,next ) => {
     try {
         let (
-            hopital,service,symptome,jour,tranche_horaire
+            hopital,service,symptome,jour,tranche_horaire, type
         ) = req.body;
 
         const rvFind = await   rvModel.find({
@@ -21,6 +21,8 @@ exports.store = async (req, res ,next ) => {
         rv.patient =  req.user.id_user;
 
         rv.hopital = hopital;
+
+        rv.type = type;
 
         rv.service = service;
 
