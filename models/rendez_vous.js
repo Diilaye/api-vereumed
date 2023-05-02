@@ -24,6 +24,7 @@ const RendezVous = new Schema({
         ref: "service_medicale"
     },
 
+
     symptome  :{
         type:String
     },
@@ -52,6 +53,10 @@ const RendezVous = new Schema({
         type :String
     },
 
+    transactions : {
+        type: Schema.Types.ObjectId,
+        ref: "transactions"
+    }
    
 
  
