@@ -117,3 +117,32 @@ exports.delete = (req  , res ,next ) => transactionModel.findByIdAndDelete(req.p
     data: error,
     status: 'NOT OK'
 }));
+
+
+exports.successOrange  =  async (req,res,next)=>  {
+    console.log("req.body =>" , req.body);
+    console.log("req.params => " , req.params);
+    console.log("req.query => " , req.query);
+    res.send("<script>window.close();</script>")
+}
+
+exports.successWave  =  async (req,res,next)=>  {
+    console.log("req.body =>" , req.body);
+    console.log("req.params => " , req.params);
+    console.log("req.query => " , req.query);
+    res.send("<script>window.close();</script>")
+}
+
+exports.errorOrange  =  async (req,res,next)=>  {
+    console.log("req.body =>" , req.body);
+    console.log("req.params => " , req.params);
+    console.log("req.query => " , req.query);
+    res.send("<script>window.close();</script>")
+}
+
+exports.errorWave  =  async (req,res,next)=>  {
+    console.log("req.body =>" , req.body);
+    console.log("req.params => " , req.params);
+    console.log("req.query => " , req.query);
+    res.send("<script>window.close();</script>")
+}
