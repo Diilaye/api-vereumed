@@ -5,16 +5,108 @@ const message  =  require('../utils/message');
 
 const populateObject = [
     {
-        path :'patient'
+        path :'patient',
+        populate : [
+            {
+                path :"avatar"
+            },
+            {
+                path :"FileofIDCard"
+            },
+            {
+                path :'address'
+            },{
+                path :'rendez_vous'
+            },
+            {
+                path : 'services',
+                populate : [
+                    {
+                        path :"avatar"
+                    },
+        
+                   
+                ]
+            }
+        ]
     },
     {
-        path :'service'
+        path :'service',
+        populate : [
+            {
+                path :"avatar"
+            },
+            {
+                path :"FileofIDCard"
+            },
+            {
+                path :'address'
+            },{
+                path :'rendez_vous'
+            },
+            {
+                path : 'services',
+                populate : [
+                    {
+                        path :"avatar"
+                    },
+        
+                   
+                ]
+            }
+        ]
     },
     {
-        path :'hopital'
+        path :'hopital',
+        populate : [
+            {
+                path :"avatar"
+            },
+            {
+                path :"FileofIDCard"
+            },
+            {
+                path :'address'
+            },{
+                path :'rendez_vous'
+            },
+            {
+                path : 'services',
+                populate : [
+                    {
+                        path :"avatar"
+                    },
+        
+                   
+                ]
+            }
+        ]
     },
     {
-        path :'doctor'
+        path :'doctor',
+        populate : [
+            {
+                path :"avatar"
+            },
+            {
+                path :"FileofIDCard"
+            },
+            {
+                path :'address'
+            },{
+                path :'rendez_vous'
+            },
+            {
+                path : 'services',
+                populate : [
+                    {
+                        path :"avatar"
+                    },
+        
+                   
+                ]
+            }
+        ]
     },
     // {
     //     path :'medicaments'
