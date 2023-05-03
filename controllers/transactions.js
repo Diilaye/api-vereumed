@@ -133,7 +133,8 @@ exports.successWave  =  async (req,res,next)=>  {
     res.send("<script>window.close();</script>")
 }
 
-exports.errorOrange  =  async (req,res,next)=>  {
+exports.errorOrange  =  async (req,res)=>  {
+    console.log("req.body =>");
     console.log("req.body =>" , req.body);
     console.log("req.params => " , req.params);
     console.log("req.query => " , req.query);
