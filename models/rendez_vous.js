@@ -17,8 +17,7 @@ const RendezVous = new Schema({
 
     doctor : {
         type: Schema.Types.ObjectId,
-        ref: "users",
-        default : ""
+        ref: "users"
     },
 
     service : {
