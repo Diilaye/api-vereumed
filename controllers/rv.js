@@ -1,6 +1,8 @@
 
 const rvModel = require('../models/rendez_vous');
 
+const message  =  require('../utils/message');
+
 exports.store = async (req, res ,next ) => {
     try {
         let (
