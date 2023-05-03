@@ -156,7 +156,7 @@ exports.store = async (req, res ,next ) => {
 
 
     } catch (error) {
-        return message.reponse(res,message.error  ,400,error);
+        return message.reponse(res,message.error()  ,400,error);
     }
 }
 
@@ -172,7 +172,7 @@ exports.all = async (req  , res ,next ) => {
 
 
     } catch (error) {
-        return message.reponse(res,message.error  ,400,error);
+        return message.reponse(res,message.error()  ,400,error);
     }
     
 }
@@ -186,7 +186,7 @@ exports.one = async (req  , res ,next ) => {
 
 
     } catch (error) {
-        return message.reponse(res,message.error  ,400,error);
+        return message.reponse(res,message.error()  ,400,error);
     }
 }
 
@@ -230,7 +230,7 @@ exports.update = async  (req  , res ,next ) => {
 
     } catch (error) {
         
-        return message.reponse(res,message.error  ,400,error);
+        return message.reponse(res,message.error()  ,400,error);
 
     }
    
