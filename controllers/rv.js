@@ -3,40 +3,64 @@ const rvModel = require('../models/rendez_vous');
 
 const message  =  require('../utils/message');
 
-exports.store = async (req, res ,next ) => {
-    try {
-        let (
-            hopital,service,symptome,jour,tranche_horaire, type
-        ) = req.body;
+const populateObject = [
+    {
+        path :'patient'
+    },
+    {
+        path :'service'
+    },
+    {
+        path :'hopital'
+    },
+    {
+        path :'doctor'
+    },
+    // {
+    //     path :'medicaments'
+    // }
+];
 
+exports.store = async (req, res ,next ) => {
+
+    
+    try {
+        const {
+            hopital,service,symptome,jour,tranche_horaire, type
+        }
+           
+        = req.body;
+    
         const rvFind = await   rvModel.find({
             jour : jour,
             tranche_horaire : tranche_horaire,
         }).exec();
-
+    
         if (rvFind.length > 4) {
-            return message.reponse(res,message.error  ,400,"Choisir une autre tranche horiare celui-ci est pleine");
+            return message.reponse(res,message.error  ,400,"Choisir une autre tranche horiare celui-ci est pleine prendre la suivante pour voir ");
         }
     
         const rv =  rvModel();
     
         rv.patient =  req.user.id_user;
-
+    
         rv.hopital = hopital;
-
+    
         rv.type = type;
-
+    
         rv.service = service;
-
+    
         rv.symptome = symptome;
-
+    
         rv.jour = jour;
-
+    
         rv.tranche_horaire = tranche_horaire;
     
         const rvSave = await rv.save();
+
+        const findRv = await rvModel.findById(rvSave.id).populate(populateObject).exec();
     
-        return message.reponse(res,message.createObject('rv') ,201,rvSave);
+        return message.reponse(res,message.createObject('rv') ,201,findRv);
 
 
     } catch (error) {
@@ -50,7 +74,7 @@ exports.all = async (req  , res ,next ) => {
     
     try {
         
-        const rvFind =  rvModel.find(req.query).exec();
+        const rvFind = await rvModel.find(req.query).populate(populateObject).exec();
 
         return message.reponse(res,message.findObject('rv') ,200,rvFind);
 
@@ -64,7 +88,7 @@ exports.all = async (req  , res ,next ) => {
 exports.one = async (req  , res ,next ) => {
     try {
         
-        const rvFind =  rvModel.findById(req.params.id).exec();
+        const rvFind =  rvModel.findById(req.params.id).populate(populateObject).exec();
 
         return message.reponse(res,message.findObject('rv') ,200,rvFind);
 
@@ -105,7 +129,7 @@ exports.update = async  (req  , res ,next ) => {
 
         const saveRv =  await  findRv.save();
 
-        const fRv = await  rvModel.findById(saveRv.id).exec();
+        const fRv = await  rvModel.findById(saveRv.id).populate(populateObject).exec();
 
 
         return message.reponse(res,message.updateObject('rv') ,200,fRv);
