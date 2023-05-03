@@ -38,11 +38,15 @@ const fileRoutes  = require('./routes/file');
 
 const rvRoutes  = require('./routes/rv');
 
+const transactionRoute  = require('./routes/transaction');
+
 app.use('/api/v1/users' , authRoute); 
 
 app.use('/api/v1/files' , fileRoutes); 
 
 app.use('/api/v1/rv' , rvRoutes); 
+
+app.use('/api/v1/transactions' , transactionRoute); 
 
 
 db().then(_ => {

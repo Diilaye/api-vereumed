@@ -1,6 +1,9 @@
-const transactionModel = require('../models/transactions');
+const transactionModel = require('../models/transaction');
 
 const orderid = require('order-id')('diikaanedevVerumed');
+
+const message  =  require('../utils/message');
+
 
 const  populateObject = [{
     path : 'rendez_vous'
@@ -8,28 +11,29 @@ const  populateObject = [{
 
 
 exports.store = async (req, res ,next ) => {
+    
     try {
 
         let { amount,rv } = req.body ;
 
         const id = orderid.generate();
-
+    
         
         const transaction = transactionModel();
-
+    
         transaction.reference = orderid.getTime(id);
-
+    
         transaction.token = id;
-
+    
         transaction.amount = amount;
-
+    
         transaction.rendez_vous  = rv;
-
-        const saveTransaction = await  transactionModel.save();
-
+    
+        const saveTransaction = await  transaction.save();
+    
         const findTransaction = await transactionModel.findById(saveTransaction.id).populate(populateObject).exec();
-
-        return message.response(res,message.createObject('Transaction'),201,{
+    
+        return message.reponse(res,message.createObject('Transaction'),201,{
             url:req.url,
             transaction : findTransaction
            });
