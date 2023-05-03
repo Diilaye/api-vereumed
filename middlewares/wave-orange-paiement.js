@@ -28,16 +28,6 @@ configWave = (amount ) =>  JSON.stringify({
   "success_url": "https://example.com/success"
 })
 
-let WaveConfig = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: 'https://api.wave.com/v1/checkout/sessions',
-  headers: { 
-    'Authorization': 'Bearer wave_sn_prod_U6G70A-tfpBnH8ZQ9WRkJScYe9lrEA_UQWvPqA6Qi-kA-pITtiQ9bWaiBeMzFUK5A59bSNC93h821gBFg-jmvDw4azSNz7pE8g', 
-    'Content-Type': 'application/json'
-  },
-  data : configWave("2000")
-};
 
 module.exports = async (req,res,next) =>  {
 
@@ -64,6 +54,18 @@ module.exports = async (req,res,next) =>  {
         console.log(error);
       });
     }else  {
+
+      let WaveConfig = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'https://api.wave.com/v1/checkout/sessions',
+        headers: { 
+          'Authorization': 'Bearer wave_sn_prod_U6G70A-tfpBnH8ZQ9WRkJScYe9lrEA_UQWvPqA6Qi-kA-pITtiQ9bWaiBeMzFUK5A59bSNC93h821gBFg-jmvDw4azSNz7pE8g', 
+          'Content-Type': 'application/json'
+        },
+        data : configWave(req.body.amount)
+      };
+      
 
       axios.request(WaveConfig)
       .then((response) => {
