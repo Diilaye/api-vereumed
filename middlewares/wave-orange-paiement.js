@@ -52,7 +52,7 @@ module.exports = async (req,res,next) =>  {
           "amount": req.body.amount,
           "currency": "XOF",
           "error_url": "https://api.verumed.sn/api/v1/transactions/errorWave",
-          "success_url": "https://api.verumed.sn/api/v1/transactions/successWave"
+          "success_url": "https://api.verumed.sn/api/v1/transactions/success-wave"
         })
       };
       
