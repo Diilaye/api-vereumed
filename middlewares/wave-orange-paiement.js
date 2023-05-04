@@ -5,8 +5,8 @@ configOM = (amount ) => JSON.stringify({
     "unit": "XOF",
     "value": amount
   },
-  "callbackCancelUrl": "https://api.verumed.sn/api/v1/transactions/error-orange",
-  "callbackSuccessUrl": "https://api.verumed.sn/api/v1/transactions/success-orange",
+  "callbackCancelUrl": "https://api.verumed.sn/api/v1/transactions/errorOrange",
+  "callbackSuccessUrl": "https://api.verumed.sn/api/v1/transactions/successOrange",
   "code": 159515,
   "metadata": {},
   "name": "Verumed",
@@ -24,8 +24,8 @@ configOM = (amount ) => JSON.stringify({
 configWave = (amount ) =>  JSON.stringify({
   "amount": amount,
   "currency": "XOF",
-  "error_url": "https://api.verumed.sn/api/v1/transactions/error-wave",
-  "success_url": "https://api.verumed.sn/api/v1/transactions/success-wave"
+  "error_url": "https://api.verumed.sn/api/v1/transactions/errorWave",
+  "success_url": "https://api.verumed.sn/api/v1/transactions/successWave"
 })
 
 

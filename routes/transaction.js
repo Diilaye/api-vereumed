@@ -13,12 +13,12 @@ const routes = new express.Router();
 
 // Add routes
 routes.get('/', transactionCtrl.all);
-routes.get('/:id', transactionCtrl.one);
 routes.post('/',orangeAuth,paiementMiddleware,transactionCtrl.store);
-routes.get('/success-orange',transactionCtrl.successOrange);
-routes.get('/success-wave',transactionCtrl.successWave);
-routes.get('/error-orange',transactionCtrl.errorOrange);
-routes.get('/error-wave',transactionCtrl.errorWave);
+routes.get('/successOrange',transactionCtrl.successOrange);
+routes.get('/successWave',transactionCtrl.successWave);
+routes.get('/errorOrange',transactionCtrl.errorOrange);
+routes.get('/errorWave',transactionCtrl.errorWave);
+routes.get('/:id', transactionCtrl.one);
 routes.post('/',orangeAuth,paiementMiddleware,transactionCtrl.store);
 routes.delete('/:id', transactionCtrl.delete);
 
