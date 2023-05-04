@@ -120,6 +120,7 @@ exports.delete = (req  , res ,next ) => transactionModel.findByIdAndDelete(req.p
 
 
 exports.successOrange  =  async (req,res,next)=>  {
+    console.log("req.headers",JSON.stringify(req.headers));
     console.log("req.body =>" , req.body);
     console.log("req.params => " , req.params);
     console.log("req.query => " , req.query);
@@ -127,6 +128,7 @@ exports.successOrange  =  async (req,res,next)=>  {
 }
 
 exports.successWave  =  async (req,res)=>  {
+    console.log("req.headers",JSON.stringify(req.headers));
     console.log("req.body =>" , req.body);
     console.log("req.params => " , req.params);
     console.log("req.query => " , req.query);
@@ -136,6 +138,7 @@ exports.successWave  =  async (req,res)=>  {
 //
 
 exports.errorOrange  =  async (req,res)=>  {
+    console.log("req.headers",JSON.stringify(req.headers));
     console.log("req.body =>");
     console.log("req.body =>" , req.body);
     console.log("req.params => " , req.params);
@@ -144,6 +147,7 @@ exports.errorOrange  =  async (req,res)=>  {
 }
 
 exports.errorWave  =  async (req,res)=>  {
+    console.log("req.headers",JSON.stringify(req.headers));
     console.log("req.body =>" , req.body);
     console.log("req.params => " , req.params);
     console.log("req.query => " , req.query);
