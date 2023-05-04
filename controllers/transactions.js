@@ -63,7 +63,7 @@ exports.all = async (req  , res ,next ) => {
 exports.one = async (req  , res ,next ) => {
     try {
         const transaction = await transactionModel.findById(req.params.id).populate(populateObject).exec(); 
-        return message.reponse(res,message.findObject('transaction') ,200,transactions);
+        return message.reponse(res,message.findObject('transaction') ,200,transaction);
 
         
     } catch (error) {
