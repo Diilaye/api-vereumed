@@ -45,7 +45,7 @@ module.exports = async (req,res,next) =>  {
         maxBodyLength: Infinity,
         url: 'https://api.wave.com/v1/checkout/sessions',
         headers: { 
-          'Authorization': 'Bearer wave_sn_prod_U6G70A-tfpBnH8ZQ9WRkJScYe9lrEA_UQWvPqA6Qi-kA-pITtiQ9bWaiBeMzFUK5A59bSNC93h821gBFg-jmvDw4azSNz7pE8g', 
+          'Authorization': 'Bearer wave_sn_prod_t0CQb9rv21w50ooAfq8B8BjyyY9Ldx-g-eU6VS8zxYKqlHctymZX_ayTuPYPWnp8CJ4fBxpayxyXo7aa84d9zf7sl3XOBjwDKw', 
           'Content-Type': 'application/json'
         },
         data : JSON.stringify({
