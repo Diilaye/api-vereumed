@@ -1,32 +1,6 @@
 const axios = require('axios');
 
-configOM = (amount ) => JSON.stringify({
-  "amount": {
-    "unit": "XOF",
-    "value": amount
-  },
-  "callbackCancelUrl": "https://api.verumed.sn/api/v1/transactions/errorOrange",
-  "callbackSuccessUrl": "https://api.verumed.sn/api/v1/transactions/successOrange",
-  "code": 159515,
-  "metadata": {},
-  "name": "Verumed",
-  "validity": 15
-});
 
-
-
-
-
-
-
-
-
-configWave = (amount ) =>  JSON.stringify({
-  "amount": amount,
-  "currency": "XOF",
-  "error_url": "https://api.verumed.sn/api/v1/transactions/errorWave",
-  "success_url": "https://api.verumed.sn/api/v1/transactions/successWave"
-})
 
 
 module.exports = async (req,res,next) =>  {
@@ -39,7 +13,18 @@ module.exports = async (req,res,next) =>  {
       'Authorization': 'Bearer '+req.tokenOM, 
       'Content-Type': 'application/json'
     },
-    data : configOM(req.body.amount)
+    data :JSON.stringify({
+      "amount": {
+        "unit": "XOF",
+        "value": amount
+      },
+      "callbackCancelUrl": "https://api.verumed.sn/api/v1/transactions/errorOrange",
+      "callbackSuccessUrl": "https://api.verumed.sn/api/v1/transactions/successOrange",
+      "code": 159515,
+      "metadata": {},
+      "name": "Verumed",
+      "validity": 15
+    })
   };
   
   
@@ -63,7 +48,12 @@ module.exports = async (req,res,next) =>  {
           'Authorization': 'Bearer wave_sn_prod_U6G70A-tfpBnH8ZQ9WRkJScYe9lrEA_UQWvPqA6Qi-kA-pITtiQ9bWaiBeMzFUK5A59bSNC93h821gBFg-jmvDw4azSNz7pE8g', 
           'Content-Type': 'application/json'
         },
-        data : configWave(req.body.amount)
+        data : JSON.stringify({
+          "amount": req.body.amount,
+          "currency": "XOF",
+          "error_url": "https://api.verumed.sn/api/v1/transactions/errorWave",
+          "success_url": "https://api.verumed.sn/api/v1/transactions/successWave"
+        })
       };
       
 
