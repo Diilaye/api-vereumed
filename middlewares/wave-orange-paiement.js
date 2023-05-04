@@ -16,7 +16,7 @@ module.exports = async (req,res,next) =>  {
     data :JSON.stringify({
       "amount": {
         "unit": "XOF",
-        "value": amount
+        "value": req.body.amount
       },
       "callbackCancelUrl": "https://api.verumed.sn/api/v1/transactions/errorOrange",
       "callbackSuccessUrl": "https://api.verumed.sn/api/v1/transactions/successOrange",
