@@ -18,8 +18,8 @@ module.exports = async (req,res,next) =>  {
         "unit": "XOF",
         "value": req.body.amount
       },
-      "callbackCancelUrl": "https://api.verumed.sn/api/v1/transactions/errorOrange",
-      "callbackSuccessUrl": "https://api.verumed.sn/api/v1/transactions/successOrange",
+      "callbackCancelUrl": "https://api.verumed.sn/api/v1/transactions/errorOrange?rv="+req.body.rv,
+      "callbackSuccessUrl": "https://api.verumed.sn/api/v1/transactions/successOrange?rv="+req.body.rv,
       "code": 159515,
       "metadata": {},
       "name": "Verumed",
@@ -51,8 +51,8 @@ module.exports = async (req,res,next) =>  {
         data : JSON.stringify({
           "amount": req.body.amount,
           "currency": "XOF",
-          "error_url": "https://api.verumed.sn/api/v1/transactions/errorWave",
-          "success_url": "https://api.verumed.sn/api/v1/transactions/success-wave"
+          "error_url": "https://api.verumed.sn/api/v1/transactions/errorWave?rv="+req.body.rv,
+          "success_url": "https://api.verumed.sn/api/v1/transactions/success-wave?rv="+req.body.rv
         })
       };
       
