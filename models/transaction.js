@@ -12,6 +12,8 @@ const transactionModel = new Schema({
         type : String
     },
 
+
+
     token : {
         type : String
     },
@@ -26,6 +28,12 @@ const transactionModel = new Schema({
         type: String,
         enum: ['PENDING', 'SUCCESS','CANCELED','REFUND'],
         default: 'PENDING'
+    },
+
+    method: {
+        type: String,
+        enum: ['WAVE', 'OM'],
+        default: 'WAVE'
     },
 
     date: {

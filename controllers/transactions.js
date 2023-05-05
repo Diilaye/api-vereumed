@@ -1,5 +1,7 @@
 const transactionModel = require('../models/transaction');
 
+const rvModel = require('../models/rendez_vous');
+
 const orderid = require('order-id')('diikaanedevVerumed');
 
 const message  =  require('../utils/message');
@@ -14,7 +16,7 @@ exports.store = async (req, res ,next ) => {
     
     try {
 
-        let { amount,rv } = req.body ;
+        let { amount,rv , method } = req.body ;
 
         const id = orderid.generate();
     
@@ -26,10 +28,18 @@ exports.store = async (req, res ,next ) => {
         transaction.token = id;
     
         transaction.amount = amount;
+        
+        transaction.method = method;
     
         transaction.rendez_vous  = rv;
     
         const saveTransaction = await  transaction.save();
+
+        const rvFind = await rvModel.findById(rv).exec();
+
+        rvFind.transactions = saveTransaction.id;
+
+        const rvS = await rvFind.save();
     
         const findTransaction = await transactionModel.findById(saveTransaction.id).populate(populateObject).exec();
     
@@ -92,7 +102,7 @@ exports.update = async  (req  , res ,next ) => {
 
     const saveTransaction = await transactions.save();
 
-    return  message.reponse(res,message.updateObject('User'),200,saveTransaction);
+    return  message.reponse(res,message.updateObject('Staus'),200,saveTransaction);
 
    } catch (error) {
     
@@ -120,36 +130,81 @@ exports.delete = (req  , res ,next ) => transactionModel.findByIdAndDelete(req.p
 
 
 exports.successOrange  =  async (req,res,next)=>  {
-    console.log("req.headers",JSON.stringify(req.headers));
-    console.log("req.body =>" , req.body);
-    console.log("req.params => " , req.params);
-    console.log("req.query => " , req.query);
-    res.send("<script>window.close();</script>")
+
+    try {
+
+        const  rvFind = await rvModel.findById(req.query.rv).exec();
+
+        const transactionFind = await transactionModel.findById(rvFind.transactions).exec();
+
+        transactionFind.status = 'SUCCESS';
+
+        const  svaeTr  =  await transactionFind.save();
+
+        return res.send("<script>window.close();</script>")
+    
+        
+    } catch (error) {
+        return message.reponse(res,message.error  ,400,error);
+    }
+
 }
 
 exports.successWave  =  async (req,res)=>  {
-    console.log("req.headers",JSON.stringify(req.headers));
-    console.log("req.body =>" , req.body);
-    console.log("req.params => " , req.params);
-    console.log("req.query => " , req.query);
-    res.send("<script>window.close();</script>")
+    try {
+
+        const  rvFind = await rvModel.findById(req.query.rv).exec();
+
+        const transactionFind = await transactionModel.findById(rvFind.transactions).exec();
+
+        transactionFind.status = 'SUCCESS';
+
+        const  svaeTr  =  await transactionFind.save();
+
+        return res.send("<script>window.close();</script>")
+    
+        
+    } catch (error) {
+        return message.reponse(res,message.error  ,400,error);
+    }
 }
 
 //
 
 exports.errorOrange  =  async (req,res)=>  {
-    console.log("req.headers",JSON.stringify(req.headers));
-    console.log("req.body =>");
-    console.log("req.body =>" , req.body);
-    console.log("req.params => " , req.params);
-    console.log("req.query => " , req.query);
-    res.send("<script>window.close();</script>")
+    try {
+
+        const  rvFind = await rvModel.findById(req.query.rv).exec();
+
+        const transactionFind = await transactionModel.findById(rvFind.transactions).exec();
+
+        transactionFind.status = 'CANCELED';
+
+        const  svaeTr  =  await transactionFind.save();
+
+        return res.send("<script>window.close();</script>")
+    
+        
+    } catch (error) {
+        return message.reponse(res,message.error  ,400,error);
+    }
 }
 
 exports.errorWave  =  async (req,res)=>  {
-    console.log("req.headers",JSON.stringify(req.headers));
-    console.log("req.body =>" , req.body);
-    console.log("req.params => " , req.params);
-    console.log("req.query => " , req.query);
-    res.send("<script>window.close();</script>")
+    try {
+
+        const  rvFind = await rvModel.findById(req.query.rv).exec();
+
+        const transactionFind = await transactionModel.findById(rvFind.transactions).exec();
+
+        transactionFind.status = 'CANCELED';
+
+        const  svaeTr  =  await transactionFind.save();
+
+        return res.send("<script>window.close();</script>")
+    
+        
+    } catch (error) {
+        return message.reponse(res,message.error  ,400,error);
+    }
 }

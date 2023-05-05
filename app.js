@@ -32,6 +32,9 @@ app.get('/',(req,res,next)=>{
 app.use('/verumed-file', express.static('uploads'));
 
 
+const  auth = require('./middlewares/auth');
+
+
 const authRoute  = require('./routes/auth');
 
 const fileRoutes  = require('./routes/file');
@@ -42,9 +45,9 @@ const transactionRoute  = require('./routes/transaction');
 
 app.use('/api/v1/users' , authRoute); 
 
-app.use('/api/v1/files' , fileRoutes); 
+app.use('/api/v1/files' , auth,fileRoutes); 
 
-app.use('/api/v1/rv' , rvRoutes); 
+app.use('/api/v1/rv' , auth,rvRoutes); 
 
 app.use('/api/v1/transactions' , transactionRoute); 
 
