@@ -108,9 +108,9 @@ const populateObject = [
             }
         ]
     },
-    // {
-    //     path :'medicaments'
-    // }
+    {
+        path :'transactions'
+    }
 ];
 
 exports.store = async (req, res ,next ) => {
@@ -178,9 +178,13 @@ exports.all = async (req  , res ,next ) => {
 }
 
 exports.one = async (req  , res ,next ) => {
+    const rvFind = await  rvModel.findById(req.params.id).populate(populateObject).exec();
+
+        return message.reponse(res,message.findObject('rv') ,200,rvFind);
+    
     try {
         
-        const rvFind =  rvModel.findById(req.params.id).populate(populateObject).exec();
+        const rvFind = await  rvModel.findById(req.params.id).populate(populateObject).exec();
 
         return message.reponse(res,message.findObject('rv') ,200,rvFind);
 

@@ -61,9 +61,15 @@ const RendezVous = new Schema({
         type :String
     },
 
+    numero :  {
+        type:String,
+        default : Date.parse(Date.now())
+    },
+
     transactions : {
         type: Schema.Types.ObjectId,
-        ref: "transactions"
+        ref: "transactions",
+        default :null
     }
    
 
